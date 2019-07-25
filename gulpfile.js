@@ -1,6 +1,15 @@
 'use strict'
 
 // 読み取るファイル、書き出すファイルのパス設定
+// dist (全てのファイルはこのディレクトリ以下に吐き出される)
+// src
+//  ├──index.html (index.ejs)
+//  └──assets
+//       ├──css (.scssの拡張子で)
+//       ├──images
+//       └──js
+//           └──plugins (jsのプラグインなどコンパイル不要、またはしたくないファイルの置き場)
+// このディレクトリでのパスの設定なので変えたい場合は適宜編集
 const path = {
     scssfiles: ['src/assets/css/**/*.scss'], 
     destCssFiles: ['dist/assets/css/'],
@@ -18,6 +27,7 @@ const path = {
     destImageFiles: ['dist/assets/images/'] // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
 }
 
+
 const {src, dest, watch, series, parallel} = require('gulp')
 const sass = require('gulp-sass') // sassをcssにコンパイル
 const autoprefixer = require('gulp-autoprefixer') // ベンダープレフィックスを自動付加
@@ -28,14 +38,14 @@ const babel = require('gulp-babel') // es6移行のjavascriptをコンパイル
 const eslint = require('gulp-eslint') // javascriptのチェック
 const imagemin = require('gulp-imagemin') // 画像の圧縮
 const newer = require('gulp-newer') // 新しいファイルだけを判別する
-const browserSync = require('browser-sync').create() // ブラウザとシンクロ
+const browserSync = require('browser-sync').create() // ブラウザとのシンクロ
 const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
 const notify = require('gulp-notify') // エラー通知をだす
 
 const browser = (done) => {
     browserSync.init({
         server: {
-            baseDir: 'dist'
+            baseDir: 'dist' // localhostでブラウザが開いた時のルートの設定
         },
         port: 3000
     })
@@ -59,7 +69,7 @@ const compileSass = () =>
         })
     )
     .pipe(mediaQueries())
-    .pipe(autoprefixer(['last 2 versions', 'ie >= 11', 'android > 4.4.4']))
+    .pipe(autoprefixer(['last 2 versions', 'ie >= 11', 'android > 4.4.4'])) // ベンダープレフィックスを自動で付加するブラウザの設定
     .pipe(dest(path.destCssFiles))
     .pipe(browserSync.stream())
 
