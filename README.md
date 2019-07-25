@@ -2,6 +2,7 @@
 
 ## Usage
 
+### ejsとsassを使用したgulp環境設定
 
 ```bash
 node.jsの最新版をダウンロード (2019年7月25日　現在v12.6.0で動作可能)
@@ -50,5 +51,7 @@ npx gulp
 と
 control + c
 での作業となる
+
+※htmlファイルはejs、cssファイルはscssで作成すること
 
 ```
