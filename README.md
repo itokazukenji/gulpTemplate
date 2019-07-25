@@ -1,8 +1,23 @@
-# gulpTemplate
-
-## Usage
+## gulpTemplate
 
 ### ejsとsassを使用したgulp環境設定
+
+#### 機能
+
+```bash
+ejsからhtmlにコンパイル
+scssファイルにsassを記述してcssにコンパイル
+cssの記述ミスのチェック
+es6以降のjavascriptをコンパイル
+javascriptの記述ミスのチェック
+画像の圧縮
+メディアクエリまとめ
+ベンダープレフィックス自動付加
+ブラウザと同期しながらの編集
+
+```
+
+#### 導入マニュアル 
 
 ```bash
 node.jsの最新版をダウンロード (2019年7月25日　現在v12.6.0で動作可能)
