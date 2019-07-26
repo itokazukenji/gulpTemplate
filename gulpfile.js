@@ -30,7 +30,6 @@ const path = {
     destImageFiles: ['dist/assets/images/'] // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
 }
 
-
 const {src, dest, watch, series, parallel} = require('gulp')
 const sass = require('gulp-sass') // sassをcssにコンパイル
 const autoprefixer = require('gulp-autoprefixer') // ベンダープレフィックスを自動付加
@@ -111,9 +110,9 @@ const compileEs6 = () =>
 const minifyImage = () =>
     src(path.imageFiles)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-    .pipe(newer('dist/assets/images/'))
+    .pipe(newer('dist/assets/images/')) // destImageFilesのファイルパスを変えた場合はここも必ず変える
     .pipe(imagemin())
-    .pipe(dest(path.destImageFiles))    
+    .pipe(dest(path.destImageFiles))
 
 const watchFiles = () => {
     watch(path.scssfiles, compileSass)
