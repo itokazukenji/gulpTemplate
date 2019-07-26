@@ -28,7 +28,7 @@ node -v
 npm -v
 同じくバージョンを確認
 
-gulpTemplateをダウンロード （git cloneでも）
+gulpTemplateをダウンロード （git cloneでも可）
 フォルダ名を作業フォルダ名に変更し任意の場所へ
 
 ターミナルで作業用フォルダ内に入る
@@ -44,28 +44,29 @@ npm install -D
 を実行
 
 gulpfile.jsに書き込まれているフォルダ構成、コメントなどを確認
-フォルダ構成を確認
+src、assetsなど必要なフォルダとファイルの作成
+最低限srcフォルダとその直下にindex.ejsファイルは作成すること
+(watchした時にindexを読みに行くため)
+
+まずは準備した環境をbuild
+ターミナルから
+npx gulp build
+を実行
+distフォルダが作成され、準備したファイルが生成されているかを確認
 
 ターミナルから
 npx gulp
-実行で作業開始
-
-ブラウザは開くがindex.htmlがないためエラーが表示される
-フォルダ構成通りに作業フォルダ直下にsrcフォルダ、srcフォルダ直下にindex.ejsを作成し、保存
-
-distフォルダが作成され、index.htmlも吐き出されたことを確認し、ブラウザをリロード
-
-index.htmlが問題なく表示されたら作業開始
+実行でwatchしながらの作業開始
 
 作業終了、設定変更などあればターミナルから
 control + c
-でwatch状態から抜ける
+を実行でwatch状態から抜ける
 
 あとは
 npx gulp
 と
 control + c
-での作業となる
+での作業
 
 ※htmlファイルはejs、cssファイルはscssで作成すること
 
