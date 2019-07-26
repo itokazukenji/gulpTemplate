@@ -1,5 +1,6 @@
 'use strict'
 
+// config.jsonは必ず作成する。 必要ない場合、ディレクトリを変更する場合は必ず関連箇所も編集
 // 読み取るファイル、書き出すファイルのパス設定
 //
 // 作業ディレクトリ
@@ -9,6 +10,9 @@
 //                 └──assets
 //                     ├──scss (.scssの拡張子で)
 //                     ├──images
+//                     ├──json
+//                     │   └──config.json (コンポーネント内で使う変数を定義するjsonファイル)
+//                     │ 
 //                     └──js
 //                         └──plugins (jsのプラグインなどコンパイル不要、またはしたくないファイルの置き場)
 //
@@ -17,7 +21,7 @@ const path = {
     scssfiles: ['src/assets/scss/**/*.scss'], 
     destCssFiles: ['dist/assets/css/'],
 
-    ejsFiles: ['src/**/*.ejs', '!src/**/_*.ejs'],
+    ejsFiles: ['src/**/*.ejs'],
     destEjsFiles: ['dist/'],
 
     pluginFiles: ['src/assets/js/plugins/**/*'],
@@ -27,7 +31,9 @@ const path = {
     destEs6Files: ['dist/assets/js/'],
 
     imageFiles: ['src/assets/images/**/*'],
-    destImageFiles: ['dist/assets/images/'] // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
+    destImageFiles: ['dist/assets/images/'], // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
+
+    jsonDataFile: ['src/assets/json/config.json'] // コンポーネント内で使う変数データをこのファイルに
 }
 
 const {src, dest, watch, series, parallel} = require('gulp')
@@ -43,6 +49,7 @@ const newer = require('gulp-newer') // 新しいファイルだけを判別す�
 const browserSync = require('browser-sync').create() // ブラウザとのシンクロ
 const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
 const notify = require('gulp-notify') // エラー通知をだす
+const json = JSON.parse(fs.readFileSync(jsonDataFile)) // コンポーネント内で使う変数データ
 
 const browser = done => {
     browserSync.init({
@@ -83,7 +90,9 @@ const copyPlugins = () =>
 const compileEjs = () =>
     src(path.ejsFiles)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-    .pipe(ejs())
+    .pipe(ejs({
+        jsonData: json
+    }))
     .pipe(rename({extname: '.html'}))
     .pipe(dest(path.destEjsFiles))
     .pipe(browserSync.stream())
