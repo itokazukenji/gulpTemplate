@@ -45,8 +45,8 @@ npm install -D
 
 gulpfile.jsをエディターで開き書き込まれているフォルダ構成、コメントなどを確認
 src、assetsなど必要なフォルダとファイルの作成
-最低限srcフォルダとその直下にindex.ejsファイルは作成すること
-(watchした時にindexを読みに行くため)
+最低限srcフォルダとその直下にindex.ejsファイルを作成、browser-syncを機能させるため、必ずbodyタグは記述する
+(npx gulpを実行した時にindexのbodyタグを見に行くため)
 
 まずは準備した環境をbuild
 ターミナルから
