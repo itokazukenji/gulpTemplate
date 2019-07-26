@@ -7,14 +7,14 @@
 //       └────────src
 //                 ├──index.html (index.ejs)
 //                 └──assets
-//                     ├──css (.scssの拡張子で)
+//                     ├──scss (.scssの拡張子で)
 //                     ├──images
 //                     └──js
 //                         └──plugins (jsのプラグインなどコンパイル不要、またはしたくないファイルの置き場)
 //
 // このディレクトリでのパスの設定なので変えたい場合は適宜編集
 const path = {
-    scssfiles: ['src/assets/css/**/*.scss'], 
+    scssfiles: ['src/assets/scss/**/*.scss'], 
     destCssFiles: ['dist/assets/css/'],
 
     ejsFiles: ['src/**/*.ejs'],
