@@ -69,5 +69,6 @@ control + c
 での作業
 
 ※htmlファイルはejs、cssファイルはscssで作成すること
+※gulpfile.jsの設定を変更した場合はnpx gulpの前にnpx gulp buildを一度実行してからの方がベター
 
 ```
