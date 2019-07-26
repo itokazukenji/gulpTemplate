@@ -17,7 +17,7 @@ const path = {
     scssfiles: ['src/assets/scss/**/*.scss'], 
     destCssFiles: ['dist/assets/css/'],
 
-    ejsFiles: ['src/**/*.ejs'],
+    ejsFiles: ['src/**/*.ejs', '!src/**/_*.ejs'],
     destEjsFiles: ['dist/'],
 
     pluginFiles: ['src/assets/js/plugins/**/*'],
