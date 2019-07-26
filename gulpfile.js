@@ -45,7 +45,7 @@ const browserSync = require('browser-sync').create() // ブラウザとのシン
 const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
 const notify = require('gulp-notify') // エラー通知をだす
 
-const browser = (done) => {
+const browser = done => {
     browserSync.init({
         server: {
             baseDir: 'dist' // localhostでブラウザが開いた時のルートの設定
@@ -55,7 +55,7 @@ const browser = (done) => {
     done()
 }
 
-const browserSyncReload = (done) => {
+const browserSyncReload = done => {
     browserSync.reload()
     done()
 }
@@ -115,14 +115,17 @@ const minifyImage = () =>
     .pipe(imagemin())
     .pipe(dest(path.destImageFiles))    
 
-const watchFiles = () =>
+const watchFiles = () => {
     watch(path.scssfiles, compileSass)
     watch(path.ejsFiles, compileEjs)
-    watch(path.es6Files, parallel(scriptsLint, compileEs6))
+    watch(path.es6Files, series(scriptsLint, compileEs6))
     watch(path.imageFiles, minifyImage)
     watch(path.pluginFiles, copyPlugins)
     watch('dist/**/*', browserSyncReload)
+}
 
+const firstBuild = parallel(compileSass, copyPlugins, compileEjs, series(scriptsLint, compileEs6), minifyImage)
 const watchParallel = parallel(browser, watchFiles)
 
+exports.build = firstBuild
 exports.default = watchParallel
