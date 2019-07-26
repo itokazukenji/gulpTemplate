@@ -32,9 +32,7 @@ gulpTemplateをダウンロード （git cloneでも可）
 フォルダ名を作業フォルダ名に変更し任意の場所へ
 
 ターミナルで作業用フォルダ内に入る
-(デスクトップであれば
-cd /Users/○○○/Desktop/作業フォルダ名
-をターミナルで実行)
+(デスクトップであればcd /Users/○○○/Desktop/作業フォルダ名をターミナルで実行)
 
 以下は全て作業フォルダ内
 
@@ -68,7 +66,7 @@ npx gulp
 control + c
 での作業
 
-※htmlファイルはejs、cssファイルはscssで作成すること`
+※htmlファイルはejs、cssファイルはscssで作成すること
 ※コンポーネントとしてincludeするファイルはファイル名を_hoge.ejsとファイル名の最初に'_'をつけること
 (変数宣言などでエラーを表示させないため)
 ※gulpfile.jsの設定を変更した場合はnpx gulpの前にnpx gulp buildを一度実行してからの方がベター
