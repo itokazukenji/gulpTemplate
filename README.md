@@ -46,6 +46,8 @@ src、assetsなど必要なフォルダとファイルの作成
 最低限srcフォルダとその直下にindex.ejsファイルを作成、browser-syncを機能させるため、必ずbodyタグは記述する
 (npx gulpを実行した時にindexのbodyタグを見に行くため)
 
+jqueryのプラグインなど、コンパイルしないファイルはjs/pluginsの中に
+
 まずは準備した環境をbuild
 ターミナルから
 npx gulp build
