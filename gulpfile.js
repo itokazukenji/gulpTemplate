@@ -32,8 +32,6 @@ const path = {
 
     imageFiles: ['src/assets/images/**/*'],
     destImageFiles: ['dist/assets/images/'], // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
-
-    jsonDataFile: ['src/assets/json/config.json'] // コンポーネント内で使う変数データをこのファイルに
 }
 
 const {src, dest, watch, series, parallel} = require('gulp')
@@ -50,7 +48,7 @@ const browserSync = require('browser-sync').create() // ブラウザとのシン
 const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
 const notify = require('gulp-notify') // エラー通知をだす
 const fs = require('fs') // jsonを渡すためのfile system
-const json = JSON.parse(fs.readFileSync(jsonDataFile)) // コンポーネント内で使う変数データ
+const json = JSON.parse(fs.readFileSync('src/assets/json/config.json')) // コンポーネント内で使う変数データ
 
 const browser = done => {
     browserSync.init({
