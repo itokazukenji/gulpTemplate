@@ -49,6 +49,7 @@ const newer = require('gulp-newer') // 新しいファイルだけを判別す�
 const browserSync = require('browser-sync').create() // ブラウザとのシンクロ
 const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
 const notify = require('gulp-notify') // エラー通知をだす
+const fs = require('gulp-fs') // jsonを渡すためのfile system
 const json = JSON.parse(fs.readFileSync(jsonDataFile)) // コンポーネント内で使う変数データ
 
 const browser = done => {
