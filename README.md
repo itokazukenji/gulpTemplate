@@ -69,6 +69,7 @@ control + c
 での作業
 
 ※htmlファイルはejs、cssファイルはscssで作成すること
+※コンポーネントとしてincludeするファイルはファイル名を_hoge.ejsとファイル名の最初に'_'をつけること(変数宣言などでエラーを表示させないため)
 ※gulpfile.jsの設定を変更した場合はnpx gulpの前にnpx gulp buildを一度実行してからの方がベター
 ※新しいファイルを作成したのにdistに反映されない場合などは一度control + cでwatchを抜けてnpx gulp build、npx gulpと実行してみる
 ```
