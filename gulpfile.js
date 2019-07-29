@@ -34,22 +34,22 @@ const path = {
     destImageFiles: ['dist/assets/images/'], // ここを変える場合はnewerのパスの指定も変える newer部分で原因不明のエラーが出て変数が使えない為
 
     jsonDataFile: ['src/assets/json/config.json'] // ejs内で使う変数データをこのファイルに
-}
+};
 
-const {src, dest, watch, series, parallel} = require('gulp')
-const sass = require('gulp-sass') // sassをcssにコンパイル
-const autoprefixer = require('gulp-autoprefixer') // ベンダープレフィックスを自動付加
-const ejs = require('gulp-ejs') // ejsをコンパイル
-const rename = require('gulp-rename') // 拡張子を変える
-const babel = require('gulp-babel') // es6移行のjavascriptをコンパイル
-const eslint = require('gulp-eslint') // javascriptのチェック
-const imagemin = require('gulp-imagemin') // 画像の圧縮
-const newer = require('gulp-newer') // 新しいファイルだけを判別する
-const browserSync = require('browser-sync').create() // ブラウザとのシンクロ
-const plumber = require('gulp-plumber') // エラーが出てもwatchを止めない
-const notify = require('gulp-notify') // エラー通知をだす
-const fs = require('fs') // jsonを渡すためのfile system
-const json = JSON.parse(fs.readFileSync('src/assets/json/config.json')) // ejs内で使う変数データ
+const {src, dest, watch, series, parallel} = require('gulp');
+const sass = require('gulp-sass'); // sassをcssにコンパイル
+const autoprefixer = require('gulp-autoprefixer'); // ベンダープレフィックスを自動付加
+const ejs = require('gulp-ejs'); // ejsをコンパイル
+const rename = require('gulp-rename'); // 拡張子を変える
+const babel = require('gulp-babel'); // es6移行のjavascriptをコンパイル
+const eslint = require('gulp-eslint'); // javascriptのチェック
+const imagemin = require('gulp-imagemin'); // 画像の圧縮
+const newer = require('gulp-newer'); // 新しいファイルだけを判別する
+const browserSync = require('browser-sync').create(); // ブラウザとのシンクロ
+const plumber = require('gulp-plumber'); // エラーが出てもwatchを止めない
+const notify = require('gulp-notify'); // エラー通知をだす
+const fs = require('fs'); // jsonを渡すためのfile system
+const json = JSON.parse(fs.readFileSync('src/assets/json/config.json')); // ejs内で使う変数データ
 
 const browser = done => {
     browserSync.init({
@@ -57,14 +57,14 @@ const browser = done => {
             baseDir: 'dist' // localhostでブラウザが開いた時のルートの設定
         },
         port: 3000
-    })
-    done()
-}
+    });
+    done();
+};
 
 const browserSyncReload = done => {
-    browserSync.reload()
-    done()
-}
+    browserSync.reload();
+    done();
+};
 
 const compileSass = () =>
     src(path.scssfiles)
@@ -79,12 +79,12 @@ const compileSass = () =>
     )
     .pipe(autoprefixer(['last 2 versions', 'ie >= 11', 'android > 4.4.4'])) // ベンダープレフィックスを自動で付加するブラウザの設定
     .pipe(dest(path.destCssFiles))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream());
 
 const copyPlugins = () =>
     src(path.pluginFiles)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-    .pipe(dest(path.destPluginFiles))
+    .pipe(dest(path.destPluginFiles));
 
 const compileEjs = () =>
     src(path.ejsFiles)
@@ -94,7 +94,7 @@ const compileEjs = () =>
     }))
     .pipe(rename({extname: '.html'}))
     .pipe(dest(path.destEjsFiles))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream());
 
 const scriptsLint = () =>
     src(path.es6Files)
@@ -104,7 +104,7 @@ const scriptsLint = () =>
     }))
     .pipe(eslint({useEslintrc: true}))
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
+    .pipe(eslint.failAfterError());
 
 const compileEs6 = () =>
     src(path.es6Files)
@@ -113,26 +113,26 @@ const compileEs6 = () =>
         presets: ['@babel/env']
     }))
     .pipe(dest(path.destEs6Files))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream());
 
 const minifyImage = () =>
     src(path.imageFiles)
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(newer('dist/assets/images/')) // destImageFilesのファイルパスを変えた場合はここも必ず変える
     .pipe(imagemin())
-    .pipe(dest(path.destImageFiles))
+    .pipe(dest(path.destImageFiles));
 
 const watchFiles = () => {
-    watch(path.scssfiles, compileSass)
-    watch(path.ejsFiles, compileEjs)
-    watch(path.es6Files, series(scriptsLint, compileEs6))
-    watch(path.imageFiles, minifyImage)
-    watch(path.pluginFiles, copyPlugins)
-    watch('dist/**/*', browserSyncReload)
-}
+    watch(path.scssfiles, compileSass);
+    watch(path.ejsFiles, compileEjs);
+    watch(path.es6Files, series(scriptsLint, compileEs6));
+    watch(path.imageFiles, minifyImage);
+    watch(path.pluginFiles, copyPlugins);
+    watch('dist/**/*', browserSyncReload);
+};
 
-const firstBuild = parallel(compileSass, copyPlugins, compileEjs, series(scriptsLint, compileEs6), minifyImage)
-const watchParallel = parallel(browser, watchFiles)
+const firstBuild = parallel(compileSass, copyPlugins, compileEjs, series(scriptsLint, compileEs6), minifyImage);
+const watchParallel = parallel(browser, watchFiles);
 
-exports.build = firstBuild
-exports.default = watchParallel
+exports.build = firstBuild;
+exports.default = watchParallel;
