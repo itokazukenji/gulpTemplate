@@ -41,7 +41,6 @@ const sass = require('gulp-sass') // sassをcssにコンパイル
 const autoprefixer = require('gulp-autoprefixer') // ベンダープレフィックスを自動付加
 const ejs = require('gulp-ejs') // ejsをコンパイル
 const rename = require('gulp-rename') // 拡張子を変える
-const mediaQueries = require('gulp-group-css-media-queries') // 別な場所に書いたメデイアクエリをまとめる
 const babel = require('gulp-babel') // es6移行のjavascriptをコンパイル
 const eslint = require('gulp-eslint') // javascriptのチェック
 const imagemin = require('gulp-imagemin') // 画像の圧縮
@@ -78,7 +77,6 @@ const compileSass = () =>
             outputStyle: 'expanded'
         })
     )
-    .pipe(mediaQueries())
     .pipe(autoprefixer(['last 2 versions', 'ie >= 11', 'android > 4.4.4'])) // ベンダープレフィックスを自動で付加するブラウザの設定
     .pipe(dest(path.destCssFiles))
     .pipe(browserSync.stream())

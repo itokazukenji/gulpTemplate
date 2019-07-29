@@ -19,7 +19,6 @@
     "gulp-babel": "^8.0.0",
     "gulp-ejs": "^4.1.1",
     "gulp-eslint": "^6.0.0",
-    "gulp-group-css-media-queries": "^1.2.2",
     "gulp-imagemin": "^6.0.0",
     "gulp-newer": "^1.4.0",
     "gulp-notify": "^3.2.0",
