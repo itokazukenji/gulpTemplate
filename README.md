@@ -72,4 +72,6 @@ control + c
 ※作成したファイルがdistに反映されない場合などは一度control + cで抜け、npx gulp build → npx gulpと実行してみる
 ※gulpfile.jsの設定を変更した場合はnpx gulpの前にnpx gulp buildを一度実行した方がいい場合もある
 
+参考にしたページ (gulpについて記述されているページはここ以外にも沢山のありますが、ここ以外は古い書き方が殆ど)
+https://ics.media/entry/3290/
 ```
