@@ -18,7 +18,7 @@
 //
 // このディレクトリでのパスの設定なので変えたい場合は適宜編集
 const path = {
-    scssfiles: ['src/assets/scss/**/*.scss', 'src/assets/scss/**/_*.scss'], 
+    scssfiles: ['src/assets/scss/**/*.scss', '!src/assets/scss/**/_*.scss'], 
     destCssFiles: ['dist/assets/css/'],
 
     ejsFiles: ['src/**/*.ejs', '!src/**/_*.ejs'],
